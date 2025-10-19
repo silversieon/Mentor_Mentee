@@ -4,6 +4,7 @@ import com.example.mentor_mentee.global.config.AppConfig;
 import java.util.Map;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Value;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,11 @@ public class App {
 
     private final String appName;
 
+
+//    @Autowired
+//    public App(String appName) {
+//        this.appName = appName;
+//    }
     public static void main(String[] args) {
         // 스프링 컨테이너를 불러오는데, AppConfig와 App 클래스에 대해 등록하는 컨테이너 불러오기
         AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class, App.class);
