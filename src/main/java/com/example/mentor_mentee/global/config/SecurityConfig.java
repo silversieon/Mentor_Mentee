@@ -16,21 +16,22 @@ public class SecurityConfig {
 
         // HTTP 요청별로 인증/인가를 설정하는 영역
         http.authorizeHttpRequests(
-                        request ->
-                                request
-                                        // /api 경로, swagger로 들어오는 모든 요청은 허락
-                                        .requestMatchers(
-                                                "/api/**",
-                                                "/swagger-ui/**",
-                                                "/v3/api-docs/**",
-                                                "/swagger-ui.html",
-                                                "/swagger-ui-custom.html")
-                                        .permitAll()
-                                        // 그 외 모든 요청은 인증 필요
-                                        .anyRequest()
-                                        .authenticated()
-                )
-                .csrf(AbstractHttpConfigurer::disable);
+                request ->
+                    request
+                        // /api 경로, swagger로 들어오는 모든 요청은 허락
+                        .requestMatchers(
+                            "/api/**",
+                            "/swagger-ui/**",
+                            "/v3/api-docs/**",
+                            "/swagger-ui.html",
+                            "/swagger-ui-custom.html")
+                        .permitAll()
+                        // 그 외 모든 요청은 인증 필요
+                        .anyRequest()
+                        .authenticated()
+            )
+            .csrf(AbstractHttpConfigurer::disable);
         return http.build();
     }
 }
+

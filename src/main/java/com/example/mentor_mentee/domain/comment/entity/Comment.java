@@ -1,4 +1,4 @@
-package com.example.mentor_mentee.domain.post.entity;
+package com.example.mentor_mentee.domain.comment.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,26 +16,14 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name= "post")
-public class Post {
+@Table(name= "comment")
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
-    @Column(nullable = false)
-    private String title;
+    @Column(name = "body", nullable = false, length = 300)
+    private String body;
 
-    @Column(nullable = false)
-    private String content;
-
-    @Column(nullable = false)
-    @Builder.Default
-    private Long views = 0L;
-
-    public void update(String title, String content) {
-        this.title = title;
-        this.content = content;
-    }
 }

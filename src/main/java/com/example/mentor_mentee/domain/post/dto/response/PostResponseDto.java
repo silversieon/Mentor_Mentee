@@ -11,3 +11,4 @@ public class PostResponseDto {
     private final String content;
     private final Long views;
 }
+
