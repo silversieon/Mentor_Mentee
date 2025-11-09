@@ -8,7 +8,6 @@ import lombok.Getter;
 public class CommentResponseDto {
 
     private Long commentId;
-
     private String body;
 
 }
