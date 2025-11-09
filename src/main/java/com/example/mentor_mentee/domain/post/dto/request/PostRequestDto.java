@@ -9,6 +9,5 @@ import lombok.Setter;
 public class PostRequestDto {
 
     private final String title;
-
     private final String content;
 }

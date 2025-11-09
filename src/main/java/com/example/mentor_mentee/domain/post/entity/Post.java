@@ -29,10 +29,6 @@ public class Post {
     @Column(nullable = false)
     private String content;
 
-    @Column(nullable = false)
-    @Builder.Default
-    private Long views = 0L;
-
     // 추가된 부분
     @OneToMany(mappedBy = "post")
     @Builder.Default

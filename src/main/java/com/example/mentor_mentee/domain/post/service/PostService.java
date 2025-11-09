@@ -1,10 +1,14 @@
 package com.example.mentor_mentee.domain.post.service;
 
+import com.example.mentor_mentee.domain.comment.dto.response.CommentResponseDto;
+import com.example.mentor_mentee.domain.comment.entity.Comment;
 import com.example.mentor_mentee.domain.post.dto.request.CreatePostRequestDto;
-import com.example.mentor_mentee.domain.post.dto.request.UpdatePostRequestDtos;
+import com.example.mentor_mentee.domain.post.dto.request.UpdatePostRequestDto;
+import com.example.mentor_mentee.domain.post.dto.response.PostListResponseDto;
 import com.example.mentor_mentee.domain.post.dto.response.PostResponseDto;
 import com.example.mentor_mentee.domain.post.entity.Post;
 import com.example.mentor_mentee.domain.post.repository.PostRepository;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -32,7 +36,6 @@ public class PostService {
             .id(savedPost.getId())
             .title(savedPost.getTitle())
             .content(savedPost.getContent())
-            .views(savedPost.getViews())
             .build();
     }
 
@@ -46,12 +49,17 @@ public class PostService {
             .id(post.getId())
             .title(post.getTitle())
             .content(post.getContent())
-            .views(post.getViews())
+            .commentCount(post.getComments().size())
+            .comments(post.getComments().
+                stream().map(comment -> CommentResponseDto.builder()
+                .commentId(comment.getId())
+                .body(comment.getBody())
+                .build()).toList())
             .build();
     }
 
     @Transactional
-    public PostResponseDto updatePost(UpdatePostRequestDtos updatePostRequestDto, Long postId) {
+    public PostResponseDto updatePost(UpdatePostRequestDto updatePostRequestDto, Long postId) {
         // 1. postId를 통해서 Post 조회, 예외 처리 필요
         Post post = postRepository.findById(postId).orElse(null);
 
@@ -63,7 +71,6 @@ public class PostService {
             .id(post.getId())
             .title(post.getTitle())
             .content(post.getContent())
-            .views(post.getViews())
             .build();
     }
 
@@ -79,17 +86,16 @@ public class PostService {
     }
 
     @Transactional(readOnly = true)
-    public List<PostResponseDto> readPostList(){
+    public List<PostListResponseDto> readPostList(){
         // 1. DB에서 모든 post들을 조회
         List<Post> posts = postRepository.findAll();
 
         // 2. 조회된 post들을 PostResponseDto로 반복문을 통해 변환
-        List<PostResponseDto> responseDtos = posts.stream().map(post ->
-            PostResponseDto.builder()
+        List<PostListResponseDto> responseDtos = posts.stream().map(post ->
+            PostListResponseDto.builder()
                 .id(post.getId())
                 .title(post.getTitle())
-                .content(post.getContent())
-                .views(post.getViews())
+                .commentCount(post.getComments().size())
                 .build()
         ).toList();
 

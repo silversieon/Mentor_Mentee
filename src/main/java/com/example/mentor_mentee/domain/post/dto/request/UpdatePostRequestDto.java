@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Builder
 @Getter
-public class UpdatePostRequestDtos {
+public class UpdatePostRequestDto {
     private final String title;
     private final String content;
 }
