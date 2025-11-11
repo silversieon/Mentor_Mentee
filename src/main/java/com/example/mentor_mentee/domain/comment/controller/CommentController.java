@@ -20,29 +20,14 @@ public class CommentController {
 
     private final CommentService commentService ;
 
-    @PostMapping
-    public CommentResponseDto createComment(@RequestBody CommentRequestDto commentRequestDto) {
-        CommentResponseDto responseDto = commentService.createComment(commentRequestDto);
+    @PostMapping("/{post-id}")
+    public CommentResponseDto createComment(@PathVariable(value = "post-id") Long postId, @RequestBody CommentRequestDto commentRequestDto) {
+        CommentResponseDto responseDto = commentService.createComment(postId, commentRequestDto);
         return responseDto;
     }
 
-    @GetMapping
-    public String getAllComments() {
-        return "댓글 리스트 조회 완료";
-    }
-
-    @GetMapping("/{comment-id}")
-    public String getCommentById(@PathVariable(value="comment-id") Long commentId) {
-        return "comment-id로 댓글 조회 완료: " + commentId.toString();
-    }
-
-    @PutMapping("/{comment-id}")
-    public String updateComment(@PathVariable(value = "comment-id") Long commentId) {
-        return "comment-id로 댓글 수정 완료:" + commentId.toString();
-    }
-
-    @DeleteMapping("/{comment-id}")
-    public String deleteComment(@PathVariable(value = "comment-id") Long commentId){
-        return "comment-id로 댓글 삭제 완료:" + commentId.toString();
+    @DeleteMapping("/{post-id}/{comment-id}")
+    public String deleteComment(@PathVariable(value = "post-id") Long postId, @PathVariable(value = "comment-id") Long commentId){
+        return commentService.deleteComment(postId, commentId);
     }
 }

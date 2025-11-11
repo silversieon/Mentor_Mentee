@@ -2,6 +2,7 @@ package com.example.mentor_mentee.domain.post.controller;
 
 import com.example.mentor_mentee.domain.post.dto.request.CreatePostRequestDto;
 import com.example.mentor_mentee.domain.post.dto.request.UpdatePostRequestDto;
+import com.example.mentor_mentee.domain.post.dto.request.UpdatePostRequestDtos;
 import com.example.mentor_mentee.domain.post.dto.response.PostResponseDto;
 import com.example.mentor_mentee.domain.post.service.PostService;
 import java.util.List;
@@ -20,23 +21,11 @@ public class PostController {
         return responseDto;
     }
 
-
-
-
-
-
     @GetMapping
-    public List<PostResponseDto> getAllPosts() {
-        List<PostResponseDto> responseDtos = postService.readPostList();
+    public List<PostListResponseDto> getAllPosts() {
+        List<PostListResponseDto> responseDtos = postService.readPostList();
         return responseDtos;
     }
-
-
-
-
-
-
-
 
     @GetMapping("/{post-id}")
     public PostResponseDto getPostById(@PathVariable(value = "post-id") Long id) {

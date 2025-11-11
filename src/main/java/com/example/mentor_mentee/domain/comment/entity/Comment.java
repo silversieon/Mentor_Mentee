@@ -1,11 +1,7 @@
 package com.example.mentor_mentee.domain.comment.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.example.mentor_mentee.domain.post.entity.Post;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,4 +22,9 @@ public class Comment {
     @Column(name = "body", nullable = false, length = 300)
     private String body;
 
+    // 추가된 부분
+    // N:1 관계
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "post_id", nullable = false) // FK 생성
+    private Post post;
 }
