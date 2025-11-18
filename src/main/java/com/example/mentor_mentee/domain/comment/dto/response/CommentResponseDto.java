@@ -9,5 +9,4 @@ public class CommentResponseDto {
 
     private Long commentId;
     private String body;
-
 }

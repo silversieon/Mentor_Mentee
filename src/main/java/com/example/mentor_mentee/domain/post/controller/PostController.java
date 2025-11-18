@@ -2,7 +2,7 @@ package com.example.mentor_mentee.domain.post.controller;
 
 import com.example.mentor_mentee.domain.post.dto.request.CreatePostRequestDto;
 import com.example.mentor_mentee.domain.post.dto.request.UpdatePostRequestDto;
-import com.example.mentor_mentee.domain.post.dto.request.UpdatePostRequestDtos;
+import com.example.mentor_mentee.domain.post.dto.response.PostListResponseDto;
 import com.example.mentor_mentee.domain.post.dto.response.PostResponseDto;
 import com.example.mentor_mentee.domain.post.service.PostService;
 import java.util.List;
